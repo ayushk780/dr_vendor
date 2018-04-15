@@ -79,20 +79,20 @@ mkdir -p "$DR_WORK_DIR/TWRP"
 cp "$RECOVERY_IMG" "$DR_WORK_DIR/TWRP/"
 
 echo -e "${green}**** Compressing Files into ZIP ****${nocol}"
-cd $PB_WORK_DIR
+cd $DR_WORK_DIR
 zip -r ${ZIP_NAME}.zip *
 BUILD_RESULT_STRING="BUILD SUCCESSFUL"
 
 BUILD_END=$(date +"%s")
 DIFF=$(($BUILD_END - $BUILD_START))
 if [[ "${BUILD_RESULT_STRING}" = "BUILD SUCCESSFUL" ]]; then
-mv ${PB_WORK_DIR}/${ZIP_NAME}.zip ${DR_WORK_DIR}/../${ZIP_NAME}.zip
+mv ${DR_WORK_DIR}/${ZIP_NAME}.zip ${DR_WORK_DIR}/../${ZIP_NAME}.zip
 echo -e "$cyan****************************************************************************************$nocol"
 echo -e "$cyan*$nocol${green} ${BUILD_RESULT_STRING}$nocol"
 echo -e "$cyan*$nocol${yellow} Build completed in $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds.$nocol"
 echo -e "$cyan*$nocol${green} RECOVERY LOCATION: ${OUT}/recovery.img$nocol"
 echo -e "$purple*$nocol${green} RECOVERY SIZE: $( du -h ${OUT}/recovery.img | awk '{print $1}' )$nocol"
-echo -e "$cyan*$nocol${green} ZIP LOCATION: ${PB_WORK}/${ZIP_NAME}.zip$nocol"
-echo -e "$purple*$nocol${green} ZIP SIZE: $( du -h ${PB_WORK}/${ZIP_NAME}.zip | awk '{print $1}' )$nocol"
+echo -e "$cyan*$nocol${green} ZIP LOCATION: ${DR_WORK}/${ZIP_NAME}.zip$nocol"
+echo -e "$purple*$nocol${green} ZIP SIZE: $( du -h ${DR_WORK}/${ZIP_NAME}.zip | awk '{print $1}' )$nocol"
 echo -e "$cyan****************************************************************************************$nocol"
 fi
