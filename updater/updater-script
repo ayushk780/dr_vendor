@@ -31,7 +31,7 @@ ui_print(" - Done...");
 ui_print(" ");
 ui_print(" Flashing Recovery...");
 package_extract_dir("Darkstar", "/sdcard/TWRP");
-package_extract_file("land.img", "/dev/block/bootdevice/by-name/recovery");
+package_extract_file("TWRP/recovery.img", "/dev/block/bootdevice/by-name/recovery");
 ui_print(" - Done...");
 ui_print(" ");
 ui_print(" Flashing Completed...!");
