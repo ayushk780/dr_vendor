@@ -1,8 +1,8 @@
 #!/bin/bash
 # Copyright (C) 2018 Mohd Faraz <mohd.faraz.abc@gmail.com>
 # Copyright (C) 2018 PitchBlackTWRP <pitchblacktwrp@gmail.com>
-# Copyright (C) 2018 Darkstar085 <sipunkumar85@gmail.com>  
-# Copyright (C) 2018 ATG Droid 
+# Copyright (C) 2018 Darkstar085 <sipunkumar85@gmail.com>
+# Copyright (C) 2018 ATG Droid
 #
 # Custom build script
 #
@@ -27,7 +27,7 @@ nocol='\033[0m'
 purple='\e[0;35m'
 white='\e[0;37m'
 DATE=$(date -u +%Y%m%d-%H%M)
-DR_VENDOR=vendor/dr
+DR_VENDOR=vendor/dark
 DR_WORK=$OUT
 DR_WORK_DIR=$OUT/zip
 DEVICE=$(cut -d'_' -f2 <<<$TARGET_PRODUCT)
