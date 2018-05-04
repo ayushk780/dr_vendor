@@ -43,6 +43,7 @@ DATE=$(date -u +%Y%m%d-%H%M)
 DR_VENDOR=vendor/dark
 DR_WORK=$OUT
 DR_WORK_DIR=$OUT/zip
+DEVICE=$(cut -d'_' -f2 <<<$TARGET_PRODUCT)
 RECOVERY_IMG=$OUT/recovery.img
 DR_DEVICE=$TARGET_VENDOR_DEVICE_NAME-$(cut -d'_' -f2 <<<$TARGET_PRODUCT)
 ZIP_NAME=DarkRecovery-$DEVICE-$VERSION-$DATE
