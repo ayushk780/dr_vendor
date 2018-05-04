@@ -43,7 +43,6 @@ DATE=$(date -u +%Y%m%d-%H%M)
 DR_VENDOR=vendor/dark
 DR_WORK=$OUT
 DR_WORK_DIR=$OUT/zip
-DEVICE=$(cut -d'_' -f2 <<<$TARGET_PRODUCT)
 RECOVERY_IMG=$OUT/recovery.img
 DR_DEVICE=$TARGET_VENDOR_DEVICE_NAME-$(cut -d'_' -f2 <<<$TARGET_PRODUCT)
 ZIP_NAME=DarkRecovery-$DEVICE-$VERSION-$DATE
@@ -114,7 +113,7 @@ echo -e "${CLR_BLD_PPL}██║  ██║███████╗╚███�
 echo -e "${CLR_BLD_PPL}╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝   ╚═╝   ${CLR_RST}"
 echo -e ""
 BUILD_END=$(date +"%s")
-DIFF=$(($BUILD_END - $BUILD_START + ( ($HOURS * 60) + ($MINS * 60) + $SECS)))
+DIFF=$(($BUILD_END - $BUILD_START))
 if [[ "${BUILD_RESULT_STRING}" = "BUILD SUCCESSFUL" ]]; then
 mv ${DR_WORK_DIR}/${ZIP_NAME}.zip ${DR_WORK_DIR}/../${ZIP_NAME}.zip
 echo -e "${CLR_BLD_CYA}****************************************************************************************${CLR_RST}"
