@@ -2,8 +2,10 @@
 # Copyright (C) 2018 Mohd Faraz <mohd.faraz.abc@gmail.com>
 # Copyright (C) 2018 PitchBlackTWRP <pitchblacktwrp@gmail.com>
 # Copyright (C) 2018 Darkstar085 <sipunkumar85@gmail.com>
+# Copyright (C) 2015 Paranoid Android Project
+# Copyright (C) 2018 Sweeto143
 # Copyright (C) 2018 ATG Droid
-#
+
 # Custom build script
 #
 # This software is licensed under the terms of the GNU General Public
@@ -17,15 +19,26 @@
 #
 # Please maintain this if you use this script or any part of it
 #
+# PA Colors
+# red = errors, cyan = warnings, green = confirmations, blue = informational
+# plain for generic text, bold for titles, reset flag at each end of line
+# plain blue should not be used for readability reasons - use plain cyan instead
+CLR_RST=$(tput sgr0)                        ## reset flag
+CLR_RED=$CLR_RST$(tput setaf 1)             #  red, plain
+CLR_GRN=$CLR_RST$(tput setaf 2)             #  green, plain
+CLR_YLW=$CLR_RST$(tput setaf 3)             #  yellow, plain
+CLR_BLU=$CLR_RST$(tput setaf 4)             #  blue, plain
+CLR_PPL=$CLR_RST$(tput setaf 5)             #  purple,plain
+CLR_CYA=$CLR_RST$(tput setaf 6)             #  cyan, plain
+CLR_BLD=$(tput bold)                        ## bold flag
+CLR_BLD_RED=$CLR_RST$CLR_BLD$(tput setaf 1) #  red, bold
+CLR_BLD_GRN=$CLR_RST$CLR_BLD$(tput setaf 2) #  green, bold
+CLR_BLD_YLW=$CLR_RST$CLR_BLD$(tput setaf 3) #  yellow, bold
+CLR_BLD_BLU=$CLR_RST$CLR_BLD$(tput setaf 4) #  blue, bold
+CLR_BLD_PPL=$CLR_RST$CLR_BLD$(tput setaf 5) #  purple, bold
+CLR_BLD_CYA=$CLR_RST$CLR_BLD$(tput setaf 6) #  cyan, bold
+
 BUILD_START=$(date +"%s")
-blue='\033[0;34m'
-cyan='\033[0;36m'
-green='\e[0;32m'
-yellow='\033[0;33m'
-red='\033[0;31m'
-nocol='\033[0m'
-purple='\e[0;35m'
-white='\e[0;37m'
 DATE=$(date -u +%Y%m%d-%H%M)
 DR_VENDOR=vendor/dark
 DR_WORK=$OUT
@@ -57,7 +70,7 @@ else
 	ZIP_NAME=DarkRecovery-$DEVICE-$VERSION-$DATE-UNOFFICIAL
 fi
 
-echo -e "${red}**** Making Zip ****${nocol}"
+echo -e "${CLR_BLD_RED}**** Making Zip ****${CLR_RST}"
 if [ -d "$DR_WORK_DIR" ]; then
         rm -rf "$DR_WORK_DIR"
 	rm -rf "$DR_WORK"/*.zip
@@ -67,32 +80,49 @@ if [ ! -d "DR_WORK_DIR" ]; then
         mkdir "$DR_WORK_DIR"
 fi
 
-echo -e "${blue}**** Copying Tools ****${nocol}"
+echo -e "${CLR_BLD_BLU}**** Copying Tools ****${CLR_RST}"
 cp -R "$DR_VENDOR/Darkstar" "$DR_WORK_DIR"
-
-echo -e "${green}**** Copying Updater Scripts ****${nocol}"
+echo -e "${CLR_BLD_BLU}- Copying Tools Done...${CLR_RST}"
+echo -e ""
+echo -e "${CLR_BLD_GRN}**** Copying Updater Scripts ****${CLR_RST}"
 mkdir -p "$DR_WORK_DIR/META-INF/com/google/android"
 cp -R "$DR_VENDOR/updater/"* "$DR_WORK_DIR/META-INF/com/google/android/"
-
-echo -e "${cyan}**** Copying Recovery Image ****${nocol}"
+echo -e "${CLR_BLD_GRN}- Copying Updater Scripts Done...${CLR_RST}"
+echo -e ""
+echo -e "${CLR_BLD_CYA}**** Copying Recovery Image ****${CLR_RST}"
 mkdir -p "$DR_WORK_DIR/TWRP"
 cp "$RECOVERY_IMG" "$DR_WORK_DIR/TWRP/"
-
-echo -e "${green}**** Compressing Files into ZIP ****${nocol}"
+echo -e "${CLR_BLD_CYA}- Copying Recovery Image Done...${CLR_RST}"
+echo -e ""
+echo -e "${CLR_BLD_PPL}**** Compressing Files into ZIP ****${CLR_RST}"
 cd $DR_WORK_DIR
 zip -r ${ZIP_NAME}.zip *
 BUILD_RESULT_STRING="BUILD SUCCESSFUL"
-
+echo -e "${CLR_BLD_PPL}- Compressing Zip Done...${CLR_RST}"
+echo -e ""
+echo -e "${CLR_BLD_RED}██████╗  █████╗ ██████╗ ██╗  ██╗${CLR_RST}"
+echo -e "${CLR_BLD_RED}██╔══██╗██╔══██╗██╔══██╗██║ ██╔╝${CLR_RST}"
+echo -e "${CLR_BLD_RED}██║  ██║███████║██████╔╝█████╔╝ ${CLR_RST}"
+echo -e "${CLR_BLD_RED}██║  ██║██╔══██║██╔══██╗██╔═██╗ ${CLR_RST}"
+echo -e "${CLR_BLD_RED}██████╔╝██║  ██║██║  ██║██║  ██╗${CLR_RST}"
+echo -e "${CLR_BLD_RED}╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝${CLR_RST}"
+echo -e "${CLR_BLD_PPL}██████╗ ███████╗ ██████╗ ██████╗ ██╗   ██╗███████╗██████╗ ██╗   ██╗${CLR_RST}"
+echo -e "${CLR_BLD_PPL}██╔══██╗██╔════╝██╔════╝██╔═══██╗██║   ██║██╔════╝██╔══██╗╚██╗ ██╔╝${CLR_RST}"
+echo -e "${CLR_BLD_PPL}██████╔╝█████╗  ██║     ██║   ██║██║   ██║█████╗  ██████╔╝ ╚████╔╝ ${CLR_RST}"
+echo -e "${CLR_BLD_PPL}██╔══██╗██╔══╝  ██║     ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗  ╚██╔╝  ${CLR_RST}"
+echo -e "${CLR_BLD_PPL}██║  ██║███████╗╚██████╗╚██████╔╝ ╚████╔╝ ███████╗██║  ██║   ██║   ${CLR_RST}"
+echo -e "${CLR_BLD_PPL}╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝   ╚═╝   ${CLR_RST}"
+echo -e ""
 BUILD_END=$(date +"%s")
-DIFF=$(($BUILD_END - $BUILD_START))
+DIFF=$(($BUILD_END - $BUILD_START + ( ($HOURS * 60) + ($MINS * 60) + $SECS)))
 if [[ "${BUILD_RESULT_STRING}" = "BUILD SUCCESSFUL" ]]; then
 mv ${DR_WORK_DIR}/${ZIP_NAME}.zip ${DR_WORK_DIR}/../${ZIP_NAME}.zip
-echo -e "$cyan****************************************************************************************$nocol"
-echo -e "$cyan*$nocol${green} ${BUILD_RESULT_STRING}$nocol"
-echo -e "$cyan*$nocol${yellow} Build completed in $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds.$nocol"
-echo -e "$cyan*$nocol${green} RECOVERY LOCATION: ${OUT}/recovery.img$nocol"
-echo -e "$purple*$nocol${green} RECOVERY SIZE: $( du -h ${OUT}/recovery.img | awk '{print $1}' )$nocol"
-echo -e "$cyan*$nocol${green} ZIP LOCATION: ${DR_WORK}/${ZIP_NAME}.zip$nocol"
-echo -e "$purple*$nocol${green} ZIP SIZE: $( du -h ${DR_WORK}/${ZIP_NAME}.zip | awk '{print $1}' )$nocol"
-echo -e "$cyan****************************************************************************************$nocol"
+echo -e "${CLR_BLD_CYA}****************************************************************************************${CLR_RST}"
+echo -e "${CLR_BLD_CYA}*${CLR_RST}${CLR_BLD_RED} ${BUILD_RESULT_STRING}${CLR_RST}"
+echo -e "${CLR_BLD_CYA}*${CLR_RST}${CLR_BLD_RED} Build completed in $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds.${CLR_RST}"
+echo -e "${CLR_BLD_CYA}*${CLR_RST}${CLR_BLD_RED} RECOVERY LOCATION: ${OUT}/recovery.img${CLR_RST}"
+echo -e "${CLR_BLD_PPL}*${CLR_RST}${CLR_BLD_RED} RECOVERY SIZE: $( du -h ${OUT}/recovery.img | awk '{print $1}' )${CLR_RST}"
+echo -e "${CLR_BLD_CYA}*${CLR_RST}${CLR_BLD_RED} ZIP LOCATION: ${DR_WORK}/${ZIP_NAME}.zip${CLR_RST}"
+echo -e "${CLR_BLD_PPL}*${CLR_RST}${CLR_BLD_RED} ZIP SIZE: $( du -h ${DR_WORK}/${ZIP_NAME}.zip | awk '{print $1}' )${CLR_RST}"
+echo -e "${CLR_BLD_CYA}****************************************************************************************${CLR_RST}"
 fi
