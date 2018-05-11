@@ -119,7 +119,6 @@ if [[ "${BUILD_RESULT_STRING}" = "BUILD SUCCESSFUL" ]]; then
 mv ${DR_WORK_DIR}/${ZIP_NAME}.zip ${DR_WORK_DIR}/../${ZIP_NAME}.zip
 echo -e "${CLR_BLD_CYA}****************************************************************************************${CLR_RST}"
 echo -e "${CLR_BLD_RED}*${CLR_RST}${CLR_BLD_RED} ${BUILD_RESULT_STRING}${CLR_RST}"
-echo -e "${CLR_BLD_BLU}*${CLR_RST}${CLR_BLD_BLU} Build completed in $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds.${CLR_RST}"
 echo -e "${CLR_BLD_GRN}*${CLR_RST}${CLR_BLD_GRN} RECOVERY LOCATION: ${OUT}/recovery.img${CLR_RST}"
 echo -e "${CLR_BLD_YLW}*${CLR_RST}${CLR_BLD_YLW} RECOVERY SIZE: $( du -h ${OUT}/recovery.img | awk '{print $1}' )${CLR_RST}"
 echo -e "${CLR_BLD_PPL}*${CLR_RST}${CLR_BLD_PPL} ZIP LOCATION: ${DR_WORK}/${ZIP_NAME}.zip${CLR_RST}"
